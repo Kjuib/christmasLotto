@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/images', express.static('public/images'))
+app.use('/game', express.static('public/game'))
 
 app.post('/reset', async (req, res) => {
     await db.reset();
