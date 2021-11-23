@@ -17,9 +17,7 @@ export async function getNextEmployees() {
 
     const filteredEmployeeList = _.filter(employeeList, { complete: false });
 
-    const nextEmployeeList = _.slice(filteredEmployeeList, 0, 5);
-
-    return nextEmployeeList;
+    return _.slice(filteredEmployeeList, 0, 5);
 }
 
 export async function getNextGifts() {
@@ -27,9 +25,7 @@ export async function getNextGifts() {
 
     const filteredGiftList = _.filter(giftList, { complete: false });
 
-    const nextGiftList = _.slice(filteredGiftList, 0, 3);
-
-    return nextGiftList;
+    return _.slice(filteredGiftList, 0, 3);
 }
 
 export async function giveGift(body = {}) {
@@ -62,6 +58,34 @@ export async function giveGift(body = {}) {
 
     await fs.writeFileSync(employeeFile, JSON.stringify(employeeList, null, 2));
     await fs.writeFileSync(giftFile, JSON.stringify(giftList, null, 2));
+}
+
+export async function undo() {
+    const employeeList = await readJsonFile(employeeFile);
+    const giftList = await readJsonFile(giftFile);
+
+    const lastEmployee = _.findLast(employeeList, { complete: true });
+    const lastGift = _.find(giftList, { id: lastEmployee.gift.id });
+
+    lastEmployee.complete = false;
+    lastEmployee.gift = null;
+
+    lastGift.complete = false;
+    lastGift.employeeId = null;
+
+    await fs.writeFileSync(employeeFile, JSON.stringify(employeeList, null, 2));
+    await fs.writeFileSync(giftFile, JSON.stringify(giftList, null, 2));
+}
+
+export async function skip() {
+    const employeeList = await readJsonFile(employeeFile);
+
+    const nextEmployee = _.find(employeeList, { complete: false });
+
+    _.remove(employeeList, { id: nextEmployee.id });
+    employeeList.push(nextEmployee);
+
+    await fs.writeFileSync(employeeFile, JSON.stringify(employeeList, null, 2));
 }
 
 export async function reset() {

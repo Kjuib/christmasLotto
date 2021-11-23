@@ -45,6 +45,18 @@ app.post('/giveGift', async (req, res) => {
     }
 });
 
+app.post('/undo', async (req, res) => {
+    await db.undo();
+
+    res.send('undo complete')
+});
+
+app.post('/skip', async (req, res) => {
+    await db.skip();
+
+    res.send('skip complete')
+});
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
