@@ -1,10 +1,8 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import * as db from './db/db.js';
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 const port = 3000
 
