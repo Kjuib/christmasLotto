@@ -1,0 +1,68 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+}
+
+html * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/screen-background.svg");
+    background-size: cover;
+}
+
+.nTitle {
+    padding: 75px;
+    color: #fff;
+    font-size: 1.75em;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.nTitle img {
+    display: inline-block;
+    position: relative;
+    top: 14px;
+    width: 250px;
+}
+
+.nGifts {
+
+}
+
+.nGift {
+    height: 200px;
+    margin-bottom: 30px;
+
+    position: relative;
+}
+
+.ngBlock {
+    position: absolute;
+    left: 100px;
+    height: 200px;
+    width: calc(100% - 200px);
+
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center;
+
+    background-color: #fff;
+    box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
+.ngBlock img {
+    height: 140px;
+    width: 240px;
+    margin: 30px;
+    object-fit: contain;
+}
+
+.ngBlock .ngName {
+    margin-right: 30px;
+    color: #b72221;
+    font-weight: bold;
+}
