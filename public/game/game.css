@@ -40,6 +40,22 @@ body {
     position: relative;
 }
 
+.ngBlock:nth-child(1) {
+    top: -200px;
+    opacity: 0;
+}
+
+.ngBlock:nth-child(2) {
+    top: 0;
+    opacity: 1;
+}
+
+.ngBlock:nth-child(3),
+.ngBlock:nth-child(4) {
+    top: 200px;
+    opacity: 0;
+}
+
 .ngBlock {
     position: absolute;
     left: 100px;
