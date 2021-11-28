@@ -1,0 +1,161 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+}
+
+html * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/screen-background.svg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.nTitle {
+    padding: 75px;
+    color: #fff;
+    font-size: 1.75em;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.nTitle img {
+    display: inline-block;
+    position: relative;
+    top: 14px;
+    width: 250px;
+}
+
+.nGifts {
+    height: 800px;
+    position: relative;
+}
+
+.ngBlock:nth-child(1) {
+    top: -250px;
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+}
+
+.ngBlock:nth-child(2) {
+    top: 0;
+    opacity: 1;
+}
+
+.ngBlock:nth-child(3) {
+    top: 250px;
+    opacity: 1;
+}
+
+.ngBlock:nth-child(4) {
+    top: 500px;
+    opacity: 1;
+}
+
+.ngBlock:nth-child(5) {
+    top: 750px;
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+}
+
+.ngBlock {
+    position: absolute;
+    left: 100px;
+    height: 200px;
+    width: calc(100% - 200px);
+
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center;
+
+    background-color: #fff;
+    box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+
+    cursor: pointer;
+}
+
+.ngBlock.ngBlank {
+    background-color: transparent;
+    box-shadow: none;
+    cursor: default;
+}
+
+.ngBlock.ngSpin {
+    background-color: transparent;
+    box-shadow: none;
+
+    color: #fff;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    cursor: default;
+}
+
+.ngSpin .ngSpinPulse {
+    animation: pulse 5s infinite;
+}
+
+.ngBlock img {
+    height: 140px;
+    width: 240px;
+    margin: 30px;
+    object-fit: contain;
+}
+
+.ngBlock .ngName {
+    margin-right: 30px;
+    color: #b72221;
+    font-weight: bold;
+}
+
+.lastGift {
+    position: fixed;
+    left: 100px;
+    bottom: 100px;
+    height: 200px;
+    width: calc(100% - 200px);
+    padding: 20px;
+
+    opacity: 1;
+    display: grid;
+    grid-template-columns: 100px 1fr 1.5fr;
+    grid-gap: 20px;
+    align-items: center;
+    font-size: .8em;
+    color: #fff;
+    background-color: rgba(0,0,0, .2);
+    border-radius: 10px;
+
+    transition: all 250ms;
+}
+
+.lastGift.hidden {
+    opacity: 0;
+}
+
+.lastGift img {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+}
+
+@keyframes pulse {
+    0%{
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(2.0);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
