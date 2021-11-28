@@ -108,7 +108,7 @@
 
         const gift = _.find(state.giftStack, { id: giftId });
 
-        eleLastGift.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="employeeName">${employee.name}</div><div class="giftName">${gift.name}</div>`;
+        eleLastGift.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="ngEmployeeName">${employee.name}</div><div class="ngGiftName">${gift.name}</div>`;
 
         await sleep(250);
 
