@@ -25,7 +25,7 @@
     }
 
     function spinPartA(spinState) {
-        const eleGiftBox = window.document.getElementById('nGiftList');
+        const eleGiftBox = window.document.getElementById('nEmployeeList');
 
         if (spinState.count < spinState.max) {
             const spinTime = spinState.count / spinState.max;
@@ -51,6 +51,31 @@
         }
     }
 
+    async function checkNext() {
+        // state.employeeStack = await getNextEmployees();
+
+        const eleEmployeeBox = window.document.getElementById('nEmployeeList');
+
+        for (let i = 0; i < 5; i++) {
+            const employee = state.employeeStack[i];
+
+            if (eleEmployeeBox.children[i] && eleEmployeeBox.children[i].id !== employee.id) {
+                eleEmployeeBox.children[i].classList.add('hidden');
+                await sleep(500);
+                eleEmployeeBox.removeChild(eleEmployeeBox.children[i]);
+            } else if (!eleEmployeeBox.children[i]) {
+                const newDiv = window.document.createElement('div');
+                newDiv.classList.add('neBlock');
+                newDiv.id = employee.id;
+                newDiv.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
+
+                eleEmployeeBox.append(newDiv);
+            }
+        }
+
+        setTimeout(checkNext, 500);
+    }
+
     // https://spicyyoghurt.com/tools/easing-functions
     function easeOutExpo (t, b, c, d) {
         return (t === d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
@@ -60,15 +85,29 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    function onKeyUp(event = {}) {
+        if (event.key === 'n') {
+            state.employeeStack.push(state.employeeStack.shift());
+
+            console.log('state.employeeStack', state.employeeStack);
+        } else {
+            console.log('event', event);
+        }
+    }
+
     async function setup() {
+        window.document.addEventListener('keyup', onKeyUp, false);
+
         state.employeeStack = [
             { id: 'e001', name: 'Jim Jimmerson', image: 'e001.png' },
             { id: 'e002', name: 'Jon Johnson', image: 'e002.png' },
-            { id: 'e003', name: 'Susan Saltwagon', image: 'e003.jpg' },
-            { id: 'e004', name: 'Old Hugh', image: 'e004.jpg' },
-            { id: 'e005', name: 'Jane Smitherton', image: 'e005.jpg' },
-            { id: 'e006', name: 'Sam Samsonite', image: 'e006.jpg' },
+            { id: 'e003', name: 'Susan Saltwagon', image: 'e003.png' },
+            { id: 'e004', name: 'Old Hugh', image: 'e004.png' },
+            { id: 'e005', name: 'Jane Smitherton', image: 'e005.png' },
+            { id: 'e006', name: 'Sam Samsonite', image: 'e006.png' },
         ];
+
+        await checkNext();
     }
 
     await setup();

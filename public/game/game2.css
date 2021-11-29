@@ -148,6 +148,63 @@ body {
     object-fit: contain;
 }
 
+.nEmployeeList {
+    position: relative;
+    padding: 0 200px;
+
+    color: #fff;
+    font-weight: bold;
+}
+
+.nEmployeeList .neBlock {
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 200px);
+
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    grid-gap: 30px;
+
+    opacity: 1;
+
+    transition: all 1000ms ease-in-out;
+}
+
+.nEmployeeList .neBlock:nth-child(1) {
+    top: 100px;
+    transform: scale(2, 2);
+}
+
+.nEmployeeList .neBlock:nth-child(2) {
+    top: 400px;
+}
+
+.nEmployeeList .neBlock:nth-child(3) {
+    top: 550px;
+}
+
+.nEmployeeList .neBlock:nth-child(4) {
+    top: 700px;
+}
+
+.nEmployeeList .neBlock:nth-child(5) {
+    top: 850px;
+
+    opacity: 0;
+}
+
+.nEmployeeList .neBlock.hidden {
+    transition: opacity 450ms linear;
+    opacity: 0;
+}
+
+.nEmployeeList .neBlock img {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+}
+
 @keyframes pulse {
     0%{
         transform: scale(1.0);
