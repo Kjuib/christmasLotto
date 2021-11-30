@@ -3,3 +3,5 @@
 
 node_modules/
 current/
+src/db/employee.js
+src/db/gifts.js
