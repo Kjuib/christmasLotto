@@ -190,6 +190,10 @@ body {
 
 .nEmployeeList .neBlock:nth-child(5) {
     top: 850px;
+}
+
+.nEmployeeList .neBlock:nth-child(6) {
+    top: 1000px;
 
     opacity: 0;
 }

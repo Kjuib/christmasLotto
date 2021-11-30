@@ -13,15 +13,25 @@
 
         const eleEmployeeBox = window.document.getElementById('nEmployeeList');
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             const employee = state.employeeStack[i];
 
             if (!employee) {
                 // ignore, we are getting close to done :)
             } else if (eleEmployeeBox.children[i] && eleEmployeeBox.children[i].id !== employee.id) {
-                eleEmployeeBox.children[i].classList.add('hidden');
-                await sleep(500);
-                eleEmployeeBox.removeChild(eleEmployeeBox.children[i]);
+                if (eleEmployeeBox.children[i + 1] && eleEmployeeBox.children[i + 1].id === employee.id) {
+                    eleEmployeeBox.children[i].classList.add('hidden');
+                    await sleep(500);
+                    eleEmployeeBox.removeChild(eleEmployeeBox.children[i]);
+                } else {
+                    const newDiv = window.document.createElement('div');
+                    newDiv.classList.add('neBlock');
+                    newDiv.id = employee.id;
+                    // newDiv.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
+                    newDiv.innerHTML = `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
+
+                    eleEmployeeBox.prepend(newDiv);
+                }
             } else if (!eleEmployeeBox.children[i]) {
                 const newDiv = window.document.createElement('div');
                 newDiv.classList.add('neBlock');
@@ -31,6 +41,10 @@
 
                 eleEmployeeBox.append(newDiv);
             }
+        }
+
+        while (eleEmployeeBox.children[6]) {
+            eleEmployeeBox.removeChild(eleEmployeeBox.children[6]);
         }
 
         setTimeout(checkNext, 1000);

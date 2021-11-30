@@ -17,7 +17,7 @@ export async function getNextEmployees() {
 
     const filteredEmployeeList = _.filter(employeeList, { complete: false });
 
-    return _.slice(filteredEmployeeList, 0, 5);
+    return _.slice(filteredEmployeeList, 0, 6);
 }
 
 export async function getNextGifts() {

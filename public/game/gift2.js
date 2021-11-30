@@ -163,6 +163,13 @@
         }
     }
 
+    async function getGiftList() {
+        const responseRaw = await fetch('http://localhost:3000/nextEmployees');
+
+        return await responseRaw.json();
+
+    }
+
     async function setup() {
         window.document.addEventListener('keyup', onKeyUp, false);
 
