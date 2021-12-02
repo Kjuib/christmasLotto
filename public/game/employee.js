@@ -8,6 +8,11 @@
         return await responseRaw.json();
     }
 
+    function generateEmployeeBlock(employee) {
+        // return `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
+        return `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div><div class="neName">${employee.name}</div><div class="neDepartment">${employee.department}</div></div>`;
+    }
+
     async function checkNext() {
         state.employeeStack = await getNextEmployees();
 
@@ -27,8 +32,7 @@
                     const newDiv = window.document.createElement('div');
                     newDiv.classList.add('neBlock');
                     newDiv.id = employee.id;
-                    // newDiv.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
-                    newDiv.innerHTML = `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
+                    newDiv.innerHTML = generateEmployeeBlock(employee);
 
                     eleEmployeeBox.prepend(newDiv);
                 }
@@ -36,8 +40,7 @@
                 const newDiv = window.document.createElement('div');
                 newDiv.classList.add('neBlock');
                 newDiv.id = employee.id;
-                // newDiv.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
-                newDiv.innerHTML = `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
+                newDiv.innerHTML = generateEmployeeBlock(employee);
 
                 eleEmployeeBox.append(newDiv);
             }

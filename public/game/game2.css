@@ -203,6 +203,13 @@ body {
     opacity: 0;
 }
 
+.nEmployeeList .neBlock .neDepartment {
+    font-size: .5em;
+    text-align: end;
+    padding-left: 50px;
+    padding-right: 10px;
+}
+
 .nEmployeeList .neBlock img {
     height: 100px;
     width: 100px;
