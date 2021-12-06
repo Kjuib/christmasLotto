@@ -9,8 +9,8 @@
     }
 
     function generateEmployeeBlock(employee) {
-        // return `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="neName">${employee.name}</div>`;
-        return `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div><div class="neName">${employee.name}</div><div class="neDepartment">${employee.department}</div></div>`;
+        return `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div><div class="neName">${employee.name}</div><div class="neDepartment">${employee.department}</div></div>`;
+        // return `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div><div class="neName">${employee.name}</div><div class="neDepartment">${employee.department}</div></div>`;
     }
 
     async function checkNext() {

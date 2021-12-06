@@ -25,7 +25,23 @@ export async function getNextGifts() {
 
     const filteredGiftList = _.filter(giftList, { complete: false });
 
-    return _.slice(filteredGiftList, 0, 3);
+    console.log('=========================');
+    console.log('PULLING FROM 1');
+    let currentGiftList = _.filter(filteredGiftList, { bucket: 1 });
+    if (currentGiftList.length < 3) {
+        console.log('PULLING FROM 2');
+        currentGiftList = _.filter(filteredGiftList, { bucket: 2 });
+    }
+    if (currentGiftList.length < 3) {
+        console.log('PULLING FROM 3');
+        currentGiftList = _.filter(filteredGiftList, { bucket: 3 });
+    }
+
+    if (currentGiftList.length < 6) {
+        currentGiftList = [...currentGiftList, ...currentGiftList];
+    }
+
+    return currentGiftList;
 }
 
 export async function giveGift(body = {}) {
@@ -104,7 +120,7 @@ export async function reset() {
         return employee;
     });
 
-    const shuffledEmployeeList = _.shuffle(resetEmployeeList);
+    const shuffledEmployeeList = _.shuffle(_.shuffle(resetEmployeeList));
 
     await fs.writeFileSync(employeeFile, JSON.stringify(shuffledEmployeeList, null, 2));
 
@@ -115,7 +131,7 @@ export async function reset() {
         return gift;
     });
 
-    const shuffledGiftList = _.shuffle(resetGiftList);
+    const shuffledGiftList = _.shuffle(_.shuffle(resetGiftList));
 
     await fs.writeFileSync(giftFile, JSON.stringify(shuffledGiftList, null, 2));
 

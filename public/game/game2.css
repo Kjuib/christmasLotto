@@ -127,10 +127,9 @@ body {
 
     opacity: 1;
     display: grid;
-    grid-template-columns: 100px 1fr 1.5fr;
+    grid-template-columns: 125px 1fr 1.5fr;
     grid-gap: 20px;
     align-items: center;
-    font-size: .8em;
     color: #fff;
     background-color: rgba(0,0,0, .2);
     border-radius: 10px;
@@ -143,8 +142,8 @@ body {
 }
 
 .lastGift img {
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
     object-fit: contain;
 }
 

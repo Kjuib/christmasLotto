@@ -100,15 +100,13 @@
 
         await sleep(250);
 
-        const employee = {
-            id: 'e001',
-            name: 'Susan Saltwagon',
-            image: 'e001.png'
-        }
+        const employee = await getNextEmployee();
+
+        await postGiveGift(employee.id, giftId);
 
         const gift = _.find(state.giftStack, { id: giftId });
 
-        eleLastGift.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="ngEmployeeName">${employee.name}</div><div class="ngGiftName">${gift.name}</div>`;
+        eleLastGift.innerHTML = `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div class="ngEmployeeName">${employee.name}</div><div class="ngGiftName"><div>${gift.name}</div><div>(${gift.id})</div></div>`;
 
         await sleep(250);
 
@@ -134,7 +132,7 @@
         }
     }
 
-    function onKeyUp(event = {}) {
+    async function onKeyUp(event = {}) {
         if (state.isSpinning) {
             console.log('STILL SPINNING', '001', state, event);
         } else if (state.needToSpin && ['1', '2', '3'].includes(event.key)) {
@@ -145,42 +143,54 @@
             state.spinState.halfWay = 0;
             state.spinState.max = _.random(25, 40);
 
+            state.giftStack = await getGiftList();
+
             spinPartA(state.spinState);
         } else if (event.key === '1') {
             const eleGiftBox = window.document.getElementById('nGiftList');
             const giftNode = eleGiftBox.children[1];
-            giveGift(giftNode.id);
+            await giveGift(giftNode.id);
         } else if (event.key === '2') {
             const eleGiftBox = window.document.getElementById('nGiftList');
             const giftNode = eleGiftBox.children[2];
-            giveGift(giftNode.id);
+            await giveGift(giftNode.id);
         } else if (event.key === '3') {
             const eleGiftBox = window.document.getElementById('nGiftList');
             const giftNode = eleGiftBox.children[3];
-            giveGift(giftNode.id);
+            await giveGift(giftNode.id);
         } else {
             console.log('event', event);
         }
     }
 
     async function getGiftList() {
-        const responseRaw = await fetch('http://localhost:3000/nextEmployees');
+        const responseRaw = await fetch('http://localhost:3000/nextGifts');
 
         return await responseRaw.json();
+    }
 
+    async function getNextEmployee() {
+        const responseRaw = await fetch('http://localhost:3000/nextEmployees');
+
+        const employeeList = await responseRaw.json();
+
+        console.log('employeeList', employeeList);
+
+        return employeeList[0];
+    }
+
+    async function postGiveGift(employeeId, giftId) {
+        await fetch('http://localhost:3000/giveGift', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ employeeId, giftId })
+        });
     }
 
     async function setup() {
         window.document.addEventListener('keyup', onKeyUp, false);
-
-        state.giftStack = [
-            { id: 'g001', name: 'Samsung 60" QLED 4K TV', image: 'tv001.jpg' },
-            { id: 'g002', name: 'A REALLY big Lego set that will take a lot of space to build', image: 'lego001.jpg' },
-            { id: 'g003', name: 'Nintendo Switch 32GB', image: 'switch001.jpg' },
-            { id: 'g004', name: '2x Samsung 60" QLED 4K TV', image: 'tv001.jpg' },
-            { id: 'g005', name: '2x A REALLY big Lego set that will take a lot of space to build', image: 'lego001.jpg' },
-            { id: 'g006', name: '2x Nintendo Switch 32GB', image: 'switch001.jpg' },
-        ];
 
         await spinPause();
     }
