@@ -141,7 +141,7 @@
             state.spinState = {};
             state.spinState.count = 0;
             state.spinState.halfWay = 0;
-            state.spinState.max = _.random(25, 40);
+            state.spinState.max = _.random(24, 36);
 
             state.giftStack = await getGiftList();
 
@@ -164,13 +164,13 @@
     }
 
     async function getGiftList() {
-        const responseRaw = await fetch('http://localhost:3000/nextGifts');
+        const responseRaw = await fetch('/nextGifts');
 
         return await responseRaw.json();
     }
 
     async function getNextEmployee() {
-        const responseRaw = await fetch('http://localhost:3000/nextEmployees');
+        const responseRaw = await fetch('/nextEmployees');
 
         const employeeList = await responseRaw.json();
 
@@ -180,7 +180,7 @@
     }
 
     async function postGiveGift(employeeId, giftId) {
-        await fetch('http://localhost:3000/giveGift', {
+        await fetch('/giveGift', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

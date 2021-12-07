@@ -3,7 +3,7 @@
     const state = {};
 
     async function getNextEmployees() {
-        const responseRaw = await fetch('http://localhost:3000/nextEmployees');
+        const responseRaw = await fetch('/nextEmployees');
 
         return await responseRaw.json();
     }

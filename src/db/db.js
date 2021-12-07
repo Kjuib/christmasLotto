@@ -54,6 +54,9 @@ export async function giveGift(body = {}) {
     if (!giftId) {
         throw 'missing required fields: giftId';
     }
+
+    console.log('GiveGift', employeeId, giftId);
+
     const employeeList = await readJsonFile(employeeFile);
     const giftList = await readJsonFile(giftFile);
 
