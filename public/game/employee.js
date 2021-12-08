@@ -10,7 +10,6 @@
 
     function generateEmployeeBlock(employee) {
         return `<img src="../images/employees/${employee.image}" alt="${employee.name}" /><div><div class="neName">${employee.name}</div><div class="neDepartment">${employee.department}</div></div>`;
-        // return `<img src="../images/employees/${_.sample(state.employeeImages)}" alt="${employee.name}" /><div><div class="neName">${employee.name}</div><div class="neDepartment">${employee.department}</div></div>`;
     }
 
     async function checkNext() {
@@ -58,15 +57,6 @@
     }
 
     async function setup() {
-        state.employeeImages = [
-            'e001.png',
-            'e002.png',
-            'e003.png',
-            'e004.png',
-            'e005.png',
-            'e006.png',
-        ]
-
         await checkNext();
     }
 
